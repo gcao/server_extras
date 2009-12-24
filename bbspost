@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+host       = `bbsinfo host`.strip
+fid        = `bbsinfo fid`.strip
+formhash   = `bbsformhash`.strip
+username   = `bbsinfo username`.strip
+password   = `bbsinfo password`.strip
+
+url        = "http://#{host}/bbs/post.php"
+referer    = "http://#{host}/bbs/forumdisplay.php?fid=#{fid}"
+
+user_agent = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5"
+
+post_data = {
+  "formhash"      => formhash,
+  "action"        => "newthread",
+  "topicsubmit"   => "yes",
+  "fid"           => fid,
+  "subject"       => "Subject",
+  "message"       => "Message body",
+  "extra"         => "",
+  "wysiwyg"       => "0",
+  "iconid"        => "",
+  "sortid"        => "0",
+  "checkbox"      => "0",
+  "tags"          => "",
+  "readperm"      => "",
+  "attention_add" => "1",
+  "usesig"        => "1",
+}.map{ |key, value| "#{key}=#{value}" }.join("&")
+
+cmd = %Q(curl -d "#{post_data}" -b /tmp/cookie.txt -o /tmp/cache.html -A "#{user_agent}" -e "#{referer}" "#{url}")
+puts cmd
+
+`#{cmd}`

@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+exit 1 if ARGV.length < 1
+
+answer = {
+  "host"     => "localhost",
+  "fid"      => "18",
+  "username" => "xxx",
+  "password" => "xxx",
+}[ARGV[0]]
+
+print answer

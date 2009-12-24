@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+host       = `bbsinfo host`.strip
+fid        = `bbsinfo fid`.strip
+
+url        = "http://#{host}/bbs/forumdisplay.php?fid=#{fid}"
+referer    = "http://#{host}/bbs/forumdisplay.php?fid=#{fid}"
+user_agent = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5"
+
+cmd = %Q(curl -b /tmp/cookie.txt -o /tmp/cache.html -A "#{user_agent}" -e "#{referer}" "#{url}")
+`#{cmd}`
+
+File.open("/tmp/cache.html") do |file|
+  file.each do |line|
+    next unless line.index('name="formhash"')
+    line =~ /value="([\w\d]+)"/
+    print $1
+    exit 0
+  end
+end
+
+exit 1

@@ -1,0 +1,12 @@
+To restore a instance, follow instructions here
+
+http://docs.amazonwebservices.com/AWSEC2/latest/GettingStartedGuide/creating-an-image.html#registering-the-ami
+
+Run these commands locally
+
+$ ec2-register primary_server_backup/monday.manifest.xml
+IMAGE ami-xxxxxxxx
+$ ec2-run-instances ami-xxxxxxxx
+$ ec2-deregister ami-xxxxxxxx
+
+Assocaite the elastic IP to this new instance

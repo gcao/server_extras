@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+host     = `bbsinfo host`.strip
+username = `bbsinfo username`.strip
+password = `bbsinfo password`.strip
+
+url = "http://#{host}/bbs/logging.php"
+
+post_data = {
+  "referer"     => "index.php",
+  "action"      => "login",
+  "loginsubmit" => "yes",
+  "loginfield"  => "username",
+  "username"    => username,
+  "password"    => password,
+  "answer"      => "",
+  "cookietime"  => "2592000",
+}.map{ |key, value| "#{key}=#{value}" }.join("&")
+
+cmd = "curl -d \"#{post_data}\" -D /tmp/cookie.txt -o /tmp/cache.html #{url}"
+puts cmd
+
+`#{cmd}`
