@@ -10,3 +10,11 @@ $ ec2-run-instances ami-xxxxxxxx
 $ ec2-deregister ami-xxxxxxxx
 
 Assocaite the elastic IP to this new instance
+
+
+IDEA
+
+Create a post in bbs
+Cron runs a script every 10 minutes to check content of that post to decide what to do
+E.g.: forward a game from TOM, forward a game from another URL
+Keep a history to avoid duplicate posts

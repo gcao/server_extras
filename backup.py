@@ -1,6 +1,13 @@
 #!/usr/bin/python  
 
 # http://blog.awarelabs.com/2009/painless-amazon-ec2-backup/
+#
+# To restore, you would have to register it using ec2 tools:
+#   ec2-register <your-s3-bucket> /image.manifest.xml
+# and then launch it using this command:
+#   ec2-run-instances <ami-identifier>
+#
+# or Amazon AWS Console (http://www.softwarepassion.com/?p=164)
 
 import os
 from datetime import date  

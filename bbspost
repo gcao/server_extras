@@ -3,8 +3,6 @@
 host       = `bbsinfo host`.strip
 fid        = `bbsinfo fid`.strip
 formhash   = `bbsformhash`.strip
-username   = `bbsinfo username`.strip
-password   = `bbsinfo password`.strip
 
 url        = "http://#{host}/bbs/post.php"
 referer    = "http://#{host}/bbs/forumdisplay.php?fid=#{fid}"
@@ -16,8 +14,8 @@ post_data = {
   "action"        => "newthread",
   "topicsubmit"   => "yes",
   "fid"           => fid,
-  "subject"       => "Subject",
-  "message"       => "Message body",
+  "subject"       => URI.escape("Subject"),
+  "message"       => URI.escape("Message body"),
   "extra"         => "",
   "wysiwyg"       => "0",
   "iconid"        => "",
