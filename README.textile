@@ -4,13 +4,27 @@ http://docs.amazonwebservices.com/AWSEC2/latest/GettingStartedGuide/creating-an-
 
 Run these commands locally
 
+Connect to S3 through S3Hub and change primary_server_backup/mondy* to be readable by everyone 
+	This is optional if I can get the ec2-register command to connect to it with my private key and certificate.
+	See http://developer.amazonwebservices.com/connect/message.jspa?messageID=126461 
+	Grant za-team@amazon.com read access to primary_server_backup and all its files should be good enough!!
+
 $ ec2-register primary_server_backup/monday.manifest.xml
 IMAGE ami-xxxxxxxx
-$ ec2-run-instances ami-xxxxxxxx
+
+$ ec2-run-instances -k ec2-keypair ami-xxxxxxxx
+
 $ ec2-deregister ami-xxxxxxxx
 
-Assocaite the elastic IP to this new instance
+$ ec2-describe-instances
 
+Assocaite the elastic IP to this new instance when the new instance is verified thoroughly
+
+$ ec2-associate-address IP -i INSTANCE
+
+Terminate the old instance
+
+$ ec2-terminate-instances OLD_INSTANCE
 
 IDEA
 
