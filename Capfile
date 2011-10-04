@@ -2,7 +2,7 @@
 load 'deploy' if respond_to?(:namespace) # cap2 differentiator
 
 set :application, "server_extras"
-set :deploy_to, "/data/apps/#{application}"
+set :deploy_to, "/data/apps/extras"
 
 set :scm, :git
 set :repository, "git://github.com/gcao/#{application}.git"
